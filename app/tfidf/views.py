@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, url_for, flash, current_ap
 from . import tfidf
 from .forms import TfidfForm
 
-@tfidf.route('/')
+@tfidf.route('/', methods=['GET', 'POST'])
 def index():
     form = TfidfForm()
     if form.validate_on_submit():
