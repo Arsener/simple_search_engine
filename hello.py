@@ -5,9 +5,6 @@ from flask_script import Manager, Shell
 
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
-
-key =os.urandom(24)
-app.config['SECRET_KEY'] = key
 manager = Manager(app)
 
 
