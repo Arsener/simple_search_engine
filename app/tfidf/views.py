@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 import os, math
 import jieba
-from flask import render_template, flash
+from flask import render_template, flash, url_for, redirect
 from . import tfidf
 from .forms import FileForm
 from flask_uploads import UploadSet, TEXT
 
-
-@tfidf.route('/', methods=['GET', 'POST'])
+@tfidf.route('/')
 def index():
+    return redirect(url_for('.tfidf'))
+
+@tfidf.route('/tfidf', methods=['GET', 'POST'])
+def tfidf():
     form = FileForm()
     text = UploadSet('text', TEXT)
     if form.validate_on_submit():

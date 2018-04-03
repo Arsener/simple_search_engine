@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %}Buida{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>SIM</h1>
+</div>
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+    <br />
+    <br />
+    内积结果（二值）：{{ result_transvection_1 }}
+    <br />
+    <br />
+    内积结果（加权）：{{ result_transvection_2 }}
+    <br />
+    <br />
+    余弦结果：{{ result_cos }}
+    <br />
+    <br />
+    Jaccard结果：{{ result_jaccard }}
+</div>
+{% endblock %}
