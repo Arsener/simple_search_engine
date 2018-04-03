@@ -11,6 +11,9 @@
 <div class="col-md-4">
     {{ wtf.quick_form(form) }}
     <br>
-    {{ answer }}
+    {% for re in result %}
+        {{ re }}
+        <br />
+    {% endfor %}
 </div>
 {% endblock %}
