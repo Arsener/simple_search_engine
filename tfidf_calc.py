@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import jieba
 
+# 预处理语料库，将每个文本分词
 for i in range(1, 417):
     with open('./app/sjet/news/' + str(i) + '.txt', 'r') as f:
         data = f.read()
