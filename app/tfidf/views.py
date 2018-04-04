@@ -6,9 +6,11 @@ from . import tfidf
 from .forms import FileForm
 from flask_uploads import UploadSet, TEXT
 
+
 @tfidf.route('/')
 def index():
     return redirect(url_for('.tfidf'))
+
 
 @tfidf.route('/tfidf', methods=['GET', 'POST'])
 def tfidf():
@@ -54,8 +56,8 @@ def tfidf_calc(file_dir, filename):
                     word_set.add(words.strip())
                 else:
                     break
-		
-		# 计算上传文本的每个词出现在语料库的多少文件中
+
+                # 计算上传文本的每个词出现在语料库的多少文件中
         for key in text_count:
             if key in word_set:
                 text_count[key] += 1.0
@@ -64,7 +66,7 @@ def tfidf_calc(file_dir, filename):
     import sys
     reload(sys)
     sys.setdefaultencoding('utf-8')
-	
+
     import datetime
     nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     result = []
@@ -72,13 +74,11 @@ def tfidf_calc(file_dir, filename):
     with open(os.path.dirname(__file__) + '/tfidf_result/' + u'龚明慧' + '-tfidf-'
                       + str(nowTime) + '-' + filename, 'a') as f:
         for key in word_count:
-			# 计算TFIDF
-            tfidf_result[key] = (word_count[key] / word_sum) *\
+            # 计算TFIDF
+            tfidf_result[key] = (word_count[key] / word_sum) * \
                                 math.log10(text_sum / text_count[key])
             re = key + '---' + str(tfidf_result[key])
             f.write(re + '\n')
             result.append(re)
 
     return result
-
-

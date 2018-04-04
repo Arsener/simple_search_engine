@@ -51,7 +51,7 @@ def sjet():
         results = []  # 保存每篇文章信息以及与query的相似度(result)
         words_count = []  # 保存每篇文章每个词的tf值
 
-		# 计算语料库中每个文章没歌词的tf值
+        # 计算语料库中每个文章没歌词的tf值
         for i in range(1, 417):
             with open(file_dir + str(i) + '.txt', 'r') as f:
                 news = []
@@ -83,14 +83,13 @@ def sjet():
         # 计算query每个词的tfidf
         seg_list = jieba.cut_for_search(query, HMM=False)
         words_in_query = list(seg_list)
-		
-		# 对query中每个词，计算在query中出现的次数
+
+        # 对query中每个词，计算在query中出现的次数
         tfidf_in_query = {}
         for word in words_in_query:
             word = word.strip()
             if len(word) > 0:
                 tfidf_in_query[word] = tfidf_in_query.get(word, 0.0) + 1.0
-		
 
         a_pow = 0.0  # query向量模长的平方
         # 计算语料库中有多少文章出现了query中的这个词， 最后直接计算这个词的tfidf
@@ -99,14 +98,14 @@ def sjet():
             for i in range(416):
                 if words_count[i].get(key, -1) != -1:
                     news_count += 1.0
-            tfidf_in_query[key] = tfidf_in_query[key] / len(words_in_query)\
-                                    * math.log10(416.0 / news_count)
+            tfidf_in_query[key] = tfidf_in_query[key] / len(words_in_query) \
+                                  * math.log10(416.0 / news_count)
             a_pow += tfidf_in_query[key] ** 2
 
         for i in range(416):
             ab = 0.0  # 向量内积
             b_pow = 0.0  # 文章向量模长的平方
-			# 计算文章每个词的tfidf
+            # 计算文章每个词的tfidf
             for key in words_count[i]:
                 sum = 1.0
                 for j in range(416):
@@ -118,8 +117,8 @@ def sjet():
 
             tfidf = ab / (a_pow * b_pow) ** 0.5
             results[i].append(tfidf)
-		
-		# 将文章按照相似度从大到小排序
+
+        # 将文章按照相似度从大到小排序
         results = sorted(results, key=lambda news: news[-1], reverse=True)
 
         return render_template('sjet.html', form=form, results=results)

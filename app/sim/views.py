@@ -14,7 +14,7 @@ def index():
 def sim():
     form = SimForm()
     if form.validate_on_submit():
-		# 获取输入的两个句子并分词
+        # 获取输入的两个句子并分词
         sentence1 = form.sentence1.data
         sentence2 = form.sentence2.data
         seg_list_1 = list(jieba.cut_for_search(sentence1, HMM=False))
@@ -78,9 +78,9 @@ def similarity(seg_list_1, seg_list_2):
 
     for key in seg_2:
         cos_denominator_2 += seg_2[key] ** 2
-	# 计算余弦
+    # 计算余弦
     result_cos = result_transvection_2 / (cos_denominator_1 * cos_denominator_2) ** 0.5
-	# 计算Jaccard
+    # 计算Jaccard
     result_jaccard = result_transvection_2 / (cos_denominator_1 + cos_denominator_2 - result_transvection_2)
     return result_transvection_2, result_cos, result_jaccard
 
