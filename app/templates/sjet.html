@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %}Buida{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Sjet</h1>
+</div>
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+    {% for re in results %}
+        {{ re[0] }}<br/>
+        {{ re[1] }}<br/>
+        {{ re[2] }}<br/>
+        {{ re[3] }}<br/>
+        <br/>
+    {% endfor %}
+</div>
+{% endblock %}

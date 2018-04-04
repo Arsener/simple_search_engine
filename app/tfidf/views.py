@@ -70,7 +70,7 @@ def tfidf_calc(file_dir, filename):
                       + '_' + filename, 'a') as f:
         for key in word_count:
             tfidf_result[key] = (word_count[key] / word_sum) *\
-                                math.log(text_sum / text_count[key])
+                                math.log10(text_sum / text_count[key])
             re = key + '---' + str(tfidf_result[key])
             f.write(re + '\n')
             result.append(re)
