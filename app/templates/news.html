@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Geegle-news{% endblock %}
+
+{% block page_content %}
+    <h1 style="text-align: center">{{ title }}</h1>
+    <hr>
+    <div class="post-body">
+        {% for c in content %}
+            {{ c }}<br />
+        {% endfor %}
+    </div>
+{% endblock %}

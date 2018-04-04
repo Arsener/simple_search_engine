@@ -2,7 +2,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 
-{% block title %}Buida{% endblock %}
+{% block title %}Geegle-TFIDF{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
@@ -10,7 +10,7 @@
 </div>
 <div class="col-md-4">
     {{ wtf.quick_form(form) }}
-    <br>
+    <br />
     {% for re in result %}
         {{ re }}
         <br />

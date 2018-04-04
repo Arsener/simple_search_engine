@@ -15,6 +15,23 @@ def index():
     return redirect(url_for('.sjet'))
 
 
+@sjet.route('/news_page/<int:id>', methods=['GET'])
+def news_page(id):
+    BASE_DIR = os.path.dirname(__file__)
+    file_dir = os.path.join(BASE_DIR, 'news/')
+    with open(file_dir + str(id) + '.txt', 'r') as f:
+        title = f.readline()
+        content = []
+        while True:
+            c = f.readline()
+            if c:
+                content.append(c)
+            else:
+                break
+
+    return render_template('news.html', title=title, content=content)
+
+
 @sjet.route('/sjet', methods=['GET', 'POST'])
 def sjet():
     form = SjetForm()
@@ -74,19 +91,19 @@ def sjet():
         a_pow = 0.0
         # 计算语料库中有多少文章出现了query中的这个词， 最后直接计算这个词的tfidf
         for key in tfidf_in_query:
-            news_count = 0
+            news_count = 1.0
             for i in range(416):
                 if words_count[i].get(key, -1) != -1:
-                    news_count += 1
+                    news_count += 1.0
             tfidf_in_query[key] = tfidf_in_query[key] / len(words_in_query)\
-                                    * math.log10(416.0 / (1.0 * news_count))
+                                    * math.log10(416.0 / news_count)
             a_pow += tfidf_in_query[key] ** 2
 
         for i in range(416):
             ab = 0.0
             b_pow = 0.0
             for key in words_count[i]:
-                sum = 0.0
+                sum = 1.0
                 for j in range(416):
                     if words_count[j].get(key, -1) != -1:
                         sum += 1.0
