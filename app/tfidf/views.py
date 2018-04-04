@@ -25,6 +25,7 @@ def tfidf():
     return render_template('tfidf.html', form=form)
 
 
+# 此处为tfidf算法具体实现
 def tfidf_calc(file_dir, filename):
     with open(file_dir + filename, 'r') as f:
         data = f.read()
@@ -53,7 +54,8 @@ def tfidf_calc(file_dir, filename):
                     word_set.add(words.strip())
                 else:
                     break
-
+		
+		# 计算上传文本的每个词出现在语料库的多少文件中
         for key in text_count:
             if key in word_set:
                 text_count[key] += 1.0
@@ -62,13 +64,15 @@ def tfidf_calc(file_dir, filename):
     import sys
     reload(sys)
     sys.setdefaultencoding('utf-8')
+	
     import datetime
     nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     result = []
     # 计算上传文本每个词的TFIDF并写入文件
-    with open(os.path.dirname(__file__) + '/tfidf_result/' + str(nowTime)
-                      + '_' + filename, 'a') as f:
+    with open(os.path.dirname(__file__) + '/tfidf_result/' + u'龚明慧' + '-tfidf-'
+                      + str(nowTime) + '-' + filename, 'a') as f:
         for key in word_count:
+			# 计算TFIDF
             tfidf_result[key] = (word_count[key] / word_sum) *\
                                 math.log10(text_sum / text_count[key])
             re = key + '---' + str(tfidf_result[key])
